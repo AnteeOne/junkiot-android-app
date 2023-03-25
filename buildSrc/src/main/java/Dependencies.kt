@@ -29,6 +29,7 @@ object Versions {
     const val dagger = "2.41"
     const val retrofit = "2.6.0"
     const val okHttp = "3.12.6"
+    const val scarlet = "0.1.12"
     const val jodaTime = "2.10.6"
     const val maskedEditText = "1.0.5"
     const val decoro = "1.5.0"
@@ -92,6 +93,7 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+        const val scarlet = "com.tinder.scarlet:scarlet:${Versions.scarlet}"
     }
 
     object Local {
