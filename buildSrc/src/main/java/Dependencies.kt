@@ -94,6 +94,8 @@ object Deps {
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
         const val scarlet = "com.tinder.scarlet:scarlet:${Versions.scarlet}"
+        const val scarletOkHttp = "com.tinder.scarlet:websocket-okhttp:${Versions.scarlet}"
+        const val scarletGson = "com.tinder.scarlet:message-adapter-gson:${Versions.scarlet}"
     }
 
     object Local {

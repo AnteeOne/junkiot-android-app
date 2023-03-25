@@ -7,7 +7,8 @@ import tech.antee.junkiot.data.remote.di.NetworkModule
 @Module(
     includes = [
         NetworkModule::class,
-        LocalModule::class
+        LocalModule::class,
+        RepositoriesModule::class
     ]
 )
 interface DataModule

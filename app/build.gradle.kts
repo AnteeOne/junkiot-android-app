@@ -26,6 +26,8 @@ dependencies {
     projectImplementation(Modules.commonUi)
     projectImplementation(Modules.commonMultiCompose)
 
+    projectImplementation(Modules.libControllImpl)
+
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.foundation)
     implementation(Deps.Compose.material)
@@ -46,6 +48,9 @@ dependencies {
 
     implementation(Deps.Network.retrofit)
     implementation(Deps.Network.okHttpLogging)
+    implementation(Deps.Network.scarlet)
+    implementation(Deps.Network.scarletOkHttp)
+    implementation(Deps.Network.scarletGson)
 
     testImplementation(Deps.Test.androidJUnit)
     androidTestImplementation(Deps.Test.espresso)

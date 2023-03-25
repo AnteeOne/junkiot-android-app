@@ -5,8 +5,9 @@ import tech.antee.junkiot.controll.impl.common.network.dto.AddControllerDto
 import tech.antee.junkiot.controll.impl.common.network.dto.ControllerDto
 import tech.antee.junkiot.controll.impl.common.network.service.ControllerApi
 import tech.antee.junkiot.controll.impl.common.network.service.ControllerReactiveApi
+import javax.inject.Inject
 
-class ControllerRemoteSourceImpl(
+class ControllerRemoteSourceImpl @Inject constructor(
     private val controllerApi: ControllerApi,
     private val controllerReactiveApi: ControllerReactiveApi
 ) : ControllerRemoteSource {

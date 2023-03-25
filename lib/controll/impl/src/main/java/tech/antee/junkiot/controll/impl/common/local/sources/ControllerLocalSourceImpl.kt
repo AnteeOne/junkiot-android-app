@@ -3,8 +3,9 @@ package tech.antee.junkiot.controll.impl.common.local.sources
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import tech.antee.junkiot.controll.impl.common.local.entities.ControllerEntity
+import javax.inject.Inject
 
-class ControllerLocalSourceImpl : ControllerLocalSource {
+class ControllerLocalSourceImpl @Inject constructor() : ControllerLocalSource {
 
     private val _controllers: MutableStateFlow<List<ControllerEntity>> = MutableStateFlow(listOf())
     override val controllers: StateFlow<List<ControllerEntity>> = _controllers

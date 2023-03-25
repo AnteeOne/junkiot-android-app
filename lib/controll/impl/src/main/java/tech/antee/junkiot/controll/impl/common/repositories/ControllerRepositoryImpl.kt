@@ -11,8 +11,9 @@ import tech.antee.junkiot.controll.impl.common.mappers.AddControllerDomainMapper
 import tech.antee.junkiot.controll.impl.common.mappers.ControllerDomainMapper
 import tech.antee.junkiot.controll.impl.common.mappers.ControllerSourceMapper
 import tech.antee.junkiot.controll.impl.common.network.sources.ControllerRemoteSource
+import javax.inject.Inject
 
-class ControllerRepositoryImpl(
+class ControllerRepositoryImpl @Inject constructor(
     private val controllerRemoteSource: ControllerRemoteSource,
     private val controllerLocalSource: ControllerLocalSource
 ) : ControllerRepository {
