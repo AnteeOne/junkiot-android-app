@@ -9,6 +9,8 @@ dependencies {
     projectApi(Modules.commonDomain)
     projectImplementation(Modules.commonDi)
 
+    projectImplementation(Modules.libControllImpl)
+
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)
     implementation(Deps.Coroutines.kotlinCore)
@@ -16,6 +18,9 @@ dependencies {
     implementation(Deps.Network.retrofit)
     implementation(Deps.Network.gsonConverter)
     implementation(Deps.Network.okHttpLogging)
+    implementation(Deps.Network.scarlet)
+    implementation(Deps.Network.scarletOkHttp)
+    implementation(Deps.Network.scarletGson)
 
     implementation(Deps.Dagger.core)
     kapt(Deps.Dagger.compiler)

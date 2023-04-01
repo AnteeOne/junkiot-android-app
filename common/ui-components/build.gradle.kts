@@ -5,8 +5,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(Modules.coreStrings))
-    implementation(project(Modules.coreStyles))
+    projectImplementation(Modules.coreStrings)
+    projectImplementation(Modules.coreStyles)
+    projectImplementation(Modules.libControllApi)
 
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)

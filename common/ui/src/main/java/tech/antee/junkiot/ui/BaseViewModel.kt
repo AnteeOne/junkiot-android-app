@@ -8,11 +8,14 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ChannelResult
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import tech.antee.junkiot.utils.coroutines.ktx.launchSecurely
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-
 
 abstract class BaseViewModel<State, Event, Action> : ViewModel() {
 
@@ -21,7 +24,6 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
 
     private val _uiEvents = Channel<Event>(capacity = Channel.UNLIMITED)
     val uiEvents: Flow<Event> = _uiEvents.receiveAsFlow()
-
 
     protected abstract fun onAction(action: Action)
 
@@ -47,7 +49,6 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
         onFinally = onFinally,
         block = block
     )
-
 
     protected inline fun <reified T : State> updateIfStateIs(
         afterUpdate: (currentState: T) -> Unit = {},

@@ -29,6 +29,7 @@ object Versions {
     const val dagger = "2.41"
     const val retrofit = "2.6.0"
     const val okHttp = "3.12.6"
+    const val scarlet = "0.1.12"
     const val jodaTime = "2.10.6"
     const val maskedEditText = "1.0.5"
     const val decoro = "1.5.0"
@@ -40,6 +41,7 @@ object Versions {
     const val compose = "1.1.0-beta04"
     const val composeMaterial = "1.0.0-alpha02"
     const val accompanist = "0.23.1"
+    const val coil = "2.3.0"
 
     const val mockito = "4.0.0"
     const val mockitoKotlin = "2.1.0"
@@ -92,6 +94,9 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+        const val scarlet = "com.tinder.scarlet:scarlet:${Versions.scarlet}"
+        const val scarletOkHttp = "com.tinder.scarlet:websocket-okhttp:${Versions.scarlet}"
+        const val scarletGson = "com.tinder.scarlet:message-adapter-gson:${Versions.scarlet}"
     }
 
     object Local {
@@ -118,6 +123,7 @@ object Deps {
         const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
         const val materialIconsCore = "androidx.compose.material:material-icons-core:${Versions.compose}"
         const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
         const val activity = "androidx.activity:activity-compose:${Versions.androidxAppcompat}"

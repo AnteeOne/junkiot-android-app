@@ -1,4 +1,4 @@
-rootProject.name = "App"
+rootProject.name = "Junkiot"
 
 pluginManagement {
     repositories {
@@ -9,9 +9,11 @@ pluginManagement {
 }
 
 include(":app")
+
 include(":core:styles")
 include(":core:strings")
 include(":core:utils")
+
 include(":common:domain")
 include(":common:data")
 include(":common:data-remote")
@@ -20,3 +22,9 @@ include(":common:di")
 include(":common:ui")
 include(":common:ui-components")
 include(":common:multi-compose")
+
+include(":feature:controller:list:api")
+include(":feature:controller:list:impl")
+
+include(":lib:controll:api")
+include(":lib:controll:impl")

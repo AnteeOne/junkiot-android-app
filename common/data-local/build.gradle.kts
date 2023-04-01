@@ -9,6 +9,8 @@ dependencies {
     projectApi(Modules.commonDomain)
     projectImplementation(Modules.commonDi)
 
+    projectImplementation(Modules.libControllImpl)
+
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)
     implementation(Deps.Coroutines.kotlinCore)

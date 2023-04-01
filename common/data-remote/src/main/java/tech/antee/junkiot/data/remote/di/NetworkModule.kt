@@ -3,6 +3,6 @@ package tech.antee.junkiot.data.remote.di
 import dagger.Module
 
 @Module(
-    includes = [RetrofitModule::class, NetworkSourcesModule::class]
+    includes = [NetworkApiModule::class, RemoteSourcesModule::class]
 )
-interface NetworkModule
+class NetworkModule
