@@ -5,15 +5,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(Modules.coreStrings))
-    implementation(project(Modules.coreStyles))
+    projectImplementation(Modules.commonMultiCompose)
 
     implementation(Deps.appCompat)
-    implementation(Deps.coreKtx)
-    implementation(Deps.material)
     implementation(Deps.Compose.foundation)
-    implementation(Deps.Compose.material)
-    implementation(Deps.Compose.material3)
-    implementation(Deps.Compose.toolsPreview)
-    debugImplementation(Deps.Compose.tools)
+    implementation(Deps.Compose.navigation)
 }

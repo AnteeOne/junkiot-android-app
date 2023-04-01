@@ -7,7 +7,7 @@ import tech.antee.junkiot.controll.impl.common.network.dto.ControllerDto
 class ControllerSourceMapper {
 
     fun mapToEntity(dto: ControllerDto): ControllerEntity = with(dto) {
-        ControllerEntity(controllerTypeId.parseControllerType(), id, name)
+        ControllerEntity(controllerTypeId.parseControllerType(), id, name, isOnline)
     }
 
     fun mapToEntity(dtos: List<ControllerDto>): List<ControllerEntity> = dtos.map(::mapToEntity)

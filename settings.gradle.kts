@@ -1,4 +1,4 @@
-rootProject.name = "App"
+rootProject.name = "Junkiot"
 
 pluginManagement {
     repositories {

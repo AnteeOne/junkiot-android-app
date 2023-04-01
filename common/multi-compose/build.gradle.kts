@@ -6,6 +6,8 @@ plugins {
 }
 
 dependencies {
+    projectImplementation(Modules.commonDi)
+
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)
 

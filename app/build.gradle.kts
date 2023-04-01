@@ -28,6 +28,8 @@ dependencies {
 
     projectImplementation(Modules.libControllImpl)
 
+    projectImplementation(Modules.featureControllerListImpl)
+
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.foundation)
     implementation(Deps.Compose.material)

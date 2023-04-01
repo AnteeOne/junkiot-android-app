@@ -8,8 +8,9 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import tech.antee.junkiot.data.remote.config.NetworkConfig
+import tech.antee.junkiot.data.remote.di.qualifiers.ScarletControllersQualifier
+import tech.antee.junkiot.data.remote.di.qualifiers.ScarletOkHttpQualifier
 import tech.antee.junkiot.data.remote.scarlet.FlowStreamAdapter
-import tech.antee.junkiot.data.remote.scarlet.ScarletOkHttpQualifier
 import javax.inject.Singleton
 
 @Module
@@ -17,11 +18,12 @@ class ScarletModule {
 
     @Singleton
     @Provides
+    @ScarletControllersQualifier
     fun scarlet(
         @ScarletOkHttpQualifier okHttpClient: OkHttpClient,
         streamAdapterFactory: StreamAdapter.Factory
     ): Scarlet = Scarlet.Builder()
-        .webSocketFactory(okHttpClient.newWebSocketFactory(NetworkConfig.WS_URL))
+        .webSocketFactory(okHttpClient.newWebSocketFactory(NetworkConfig.WS_URL + "controllers"))
         .addMessageAdapterFactory(GsonMessageAdapter.Factory())
         .addStreamAdapterFactory(streamAdapterFactory)
         .build()
@@ -35,5 +37,3 @@ class ScarletModule {
     @ScarletOkHttpQualifier
     fun okHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 }
-
-

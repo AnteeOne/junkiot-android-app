@@ -53,4 +53,6 @@ object Dimensions {
     val sizeIconS = 20.dp
     val sizeIconM = 24.dp
     val sizeIconL = 28.dp
+
+    val elevation = 4.dp
 }

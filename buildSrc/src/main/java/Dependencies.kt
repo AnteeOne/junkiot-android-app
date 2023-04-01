@@ -41,6 +41,7 @@ object Versions {
     const val compose = "1.1.0-beta04"
     const val composeMaterial = "1.0.0-alpha02"
     const val accompanist = "0.23.1"
+    const val coil = "2.3.0"
 
     const val mockito = "4.0.0"
     const val mockitoKotlin = "2.1.0"
@@ -122,6 +123,7 @@ object Deps {
         const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
         const val materialIconsCore = "androidx.compose.material:material-icons-core:${Versions.compose}"
         const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
         const val activity = "androidx.activity:activity-compose:${Versions.androidxAppcompat}"

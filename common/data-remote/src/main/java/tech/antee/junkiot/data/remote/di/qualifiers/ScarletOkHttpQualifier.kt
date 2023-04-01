@@ -1,4 +1,4 @@
-package tech.antee.junkiot.data.remote.scarlet
+package tech.antee.junkiot.data.remote.di.qualifiers
 
 import javax.inject.Qualifier
 

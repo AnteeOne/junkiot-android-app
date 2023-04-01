@@ -2,7 +2,6 @@ package tech.antee.junkiot.controll.impl.common.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import tech.antee.junkiot.controll.common.models.AddController
 import tech.antee.junkiot.controll.common.models.Controller
 import tech.antee.junkiot.controll.common.repositories.ControllerRepository
@@ -22,11 +21,10 @@ class ControllerRepositoryImpl @Inject constructor(
     private val controllerSourceMapper by lazy { ControllerSourceMapper() }
     private val addControllerDomainMapper by lazy { AddControllerDomainMapper() }
 
-    override val controllers: Flow<List<Controller>> =
-        controllerLocalSource.controllers.map(controllerDomainMapper::map)
-            .onStart { observeRemoteControllers() }
+    override val controllers: Flow<List<Controller>> = controllerLocalSource.controllers
+        .map(controllerDomainMapper::map)
 
-    private suspend fun observeRemoteControllers() {
+    override suspend fun observeRemoteControllers() {
         controllerRemoteSource.controllers.collect { remoteControllers ->
             controllerLocalSource.update(remoteControllers.map(controllerSourceMapper::mapToEntity))
         }

@@ -6,6 +6,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 import tech.antee.junkiot.controll.impl.common.network.service.ControllerApi
 import tech.antee.junkiot.controll.impl.common.network.service.ControllerReactiveApi
+import tech.antee.junkiot.data.remote.di.qualifiers.ScarletControllersQualifier
 import javax.inject.Singleton
 
 @Module(
@@ -19,6 +20,6 @@ class NetworkApiModule {
 
     @Provides
     @Singleton
-    fun controllerReactiveApi(scarlet: Scarlet): ControllerReactiveApi =
+    fun controllersReactiveApi(@ScarletControllersQualifier scarlet: Scarlet): ControllerReactiveApi =
         scarlet.create(ControllerReactiveApi::class.java)
 }
