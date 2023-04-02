@@ -8,6 +8,8 @@ interface ControllerRepository {
 
     val controllers: Flow<List<Controller>>
 
+    val simulators: Flow<List<Controller>>
+
     suspend fun observeRemoteControllers()
 
     suspend fun addController(add: AddController): Controller

@@ -30,6 +30,7 @@ dependencies {
 
     projectImplementation(Modules.featureMainImpl)
     projectImplementation(Modules.featureControllerListImpl)
+    projectImplementation(Modules.featureSimulatorListImpl)
 
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.foundation)

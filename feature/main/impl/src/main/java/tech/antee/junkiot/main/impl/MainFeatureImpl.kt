@@ -27,6 +27,7 @@ import tech.antee.junkiot.multi_compose.Destinations
 import tech.antee.junkiot.multi_compose.find
 import tech.antee.junkiot.multi_compose.ui.LocalNavigationBarState
 import tech.antee.junkiot.multi_compose.ui.rememberNavigationBarState
+import tech.antee.junkiot.simulator.list.SimulatorListFeature
 import javax.inject.Inject
 
 class MainFeatureImpl @Inject constructor() : MainFeature() {
@@ -38,11 +39,12 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
         backStackEntry: NavBackStackEntry
     ) {
         val controllersFeature = destinations.find<ControllerListFeature>()
+        val simulatorsFeature = destinations.find<SimulatorListFeature>()
         // TODO: add the remaining screens
 
         val navigationItems = listOf(
             NavigationItem(R.drawable.ic_home, R.string.nav_home, controllersFeature.featureRoute),
-            NavigationItem(R.drawable.ic_sensor, R.string.nav_sensor_mode, "sensor_mode"),
+            NavigationItem(R.drawable.ic_sensor, R.string.nav_simulator_mode, simulatorsFeature.featureRoute),
             NavigationItem(R.drawable.ic_settings, R.string.nav_settings, "settings")
         )
         var selectedNavItem by remember { mutableStateOf(navigationItems[0]) }
@@ -72,7 +74,7 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
                     startDestination = controllersFeature.featureRoute
                 ) {
                     with(controllersFeature) { composable(navController, destinations) }
-                    composable("sensor_mode") { FeaturePlaceholder("Sensor mode") }
+                    with(simulatorsFeature) { composable(navController, destinations) }
                     composable("settings") { FeaturePlaceholder("Settings") }
                 }
             }

@@ -16,7 +16,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -84,7 +83,7 @@ fun NavigationBarPreview() {
         ) {
             val navigationItems = listOf(
                 NavigationItem(R.drawable.ic_home, R.string.nav_home, "home"),
-                NavigationItem(R.drawable.ic_sensor, R.string.nav_sensor_mode, "sensor_mode"),
+                NavigationItem(R.drawable.ic_sensor, R.string.nav_simulator_mode, "sensor_mode"),
                 NavigationItem(R.drawable.ic_settings, R.string.nav_settings, "settings")
             )
             NavigationBarScaffold(

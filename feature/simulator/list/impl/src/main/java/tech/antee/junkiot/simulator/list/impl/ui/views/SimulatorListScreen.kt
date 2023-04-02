@@ -1,4 +1,4 @@
-package tech.antee.junkiot.controller.list.impl.ui.views
+package tech.antee.junkiot.simulator.list.impl.ui.views
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -20,14 +20,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import tech.antee.junkiot.controller.list.impl.ui.ControllerListViewModel
+import tech.antee.junkiot.simulator.list.impl.ui.SimulatorListViewModel
 import tech.antee.junkiot.styles.theme.Dimensions
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ControllerListScreen(
-    viewModel: ControllerListViewModel,
+fun SimulatorListScreen(
+    viewModel: SimulatorListViewModel,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -48,21 +48,21 @@ fun ControllerListScreen(
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.displaySmall,
                     fontWeight = FontWeight.SemiBold,
-                    text = "Home" // TODO: to strings
+                    text = "Simulators" // TODO: to strings
                 )
                 VerticalSpacer(Dimensions.spacingVerticalXl)
                 LazyColumn( // TODO: move to a sерarate file
                     modifier = Modifier.weight(1f)
                 ) {
                     items(
-                        items = controllers,
-                        key = { controller -> controller.id }
+                        items = simulators,
+                        key = { simulator -> simulator.id }
                     ) { item ->
-                        ControllerItemView(
+                        SimulatorItemView(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .animateItemPlacement(),
-                            controllerItem = item
+                            simulatorItem = item
                         )
                         Spacer(modifier = Modifier.height(Dimensions.spacingVerticalXs))
                     }

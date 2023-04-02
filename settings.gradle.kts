@@ -31,3 +31,5 @@ include(":feature:controller:list:impl")
 
 include(":lib:controll:api")
 include(":lib:controll:impl")
+include(":feature:simulator:list:api")
+include(":feature:simulator:list:impl")
