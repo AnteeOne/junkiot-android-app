@@ -1,6 +1,6 @@
 object Versions {
-    const val kotlin = "1.6.0"
-    const val coroutine = "1.6.0"
+    const val kotlin = "1.6.10"
+    const val coroutine = "1.6.4"
 
     const val androidxAppcompat = "1.4.0"
     const val androidxFragment = "1.2.5"
@@ -38,8 +38,8 @@ object Versions {
     const val stickyHeaders = "0.4.3@aar"
     const val fastAdapter = "5.2.2"
     const val mpAndroidChart = "v3.1.0"
-    const val compose = "1.1.0-beta04"
-    const val composeMaterial = "1.0.0-alpha02"
+    const val compose = "1.1.1"
+    const val composeMaterial = "1.0.1"
     const val accompanist = "0.23.1"
     const val coil = "2.3.0"
 
