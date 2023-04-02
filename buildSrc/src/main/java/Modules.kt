@@ -14,6 +14,9 @@ object Modules {
     const val commonUiComponents = ":common:ui-components"
     const val commonMultiCompose = ":common:multi-compose"
 
+    const val featureMainApi = ":feature:main:api"
+    const val featureMainImpl = ":feature:main:impl"
+
     const val featureControllerListApi = ":feature:controller:list:api"
     const val featureControllerListImpl = ":feature:controller:list:impl"
     const val featureControllerAddApi = ":feature:controller:add:api"

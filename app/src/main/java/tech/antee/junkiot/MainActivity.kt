@@ -10,9 +10,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import tech.antee.junkiot.controller.list.ControllerListFeature
 import tech.antee.junkiot.controller.list.impl.di.LocalControllerListDependencies
 import tech.antee.junkiot.di.LocalAppProvider
+import tech.antee.junkiot.main.MainFeature
 import tech.antee.junkiot.multi_compose.find
 import tech.antee.junkiot.styles.theme.JunkiotTheme
 
@@ -32,11 +32,11 @@ class MainActivity : ComponentActivity() {
     private fun Navigation(modifier: Modifier = Modifier) {
         val navController = rememberNavController()
         val destinations = LocalAppProvider.current.destinations
-        val controllerListFeature = destinations.find<ControllerListFeature>()
+        val mainFeature = destinations.find<MainFeature>()
 
         Box(modifier.fillMaxSize()) {
-            NavHost(navController, controllerListFeature.featureRoute) {
-                with(controllerListFeature) { composable(navController, destinations) }
+            NavHost(navController, mainFeature.featureRoute) {
+                with(mainFeature) { composable(navController, destinations) }
             }
         }
     }
