@@ -23,8 +23,13 @@ include(":common:ui")
 include(":common:ui-components")
 include(":common:multi-compose")
 
+include(":feature:main:api")
+include(":feature:main:impl")
+
 include(":feature:controller:list:api")
 include(":feature:controller:list:impl")
 
 include(":lib:controll:api")
 include(":lib:controll:impl")
+include(":feature:simulator:list:api")
+include(":feature:simulator:list:impl")

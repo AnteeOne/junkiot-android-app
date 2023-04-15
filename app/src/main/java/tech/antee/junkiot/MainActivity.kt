@@ -10,17 +10,18 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import tech.antee.junkiot.controller.list.ControllerListFeature
 import tech.antee.junkiot.controller.list.impl.di.LocalControllerListDependencies
 import tech.antee.junkiot.di.LocalAppProvider
+import tech.antee.junkiot.main.MainFeature
 import tech.antee.junkiot.multi_compose.find
+import tech.antee.junkiot.simulator.list.impl.di.LocalSimulatorListDependencies
 import tech.antee.junkiot.styles.theme.JunkiotTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JunkiotTheme {
+            JunkiotTheme(useDynamicColors = true) {
                 GlobalDependenciesProvider {
                     Navigation()
                 }
@@ -32,11 +33,11 @@ class MainActivity : ComponentActivity() {
     private fun Navigation(modifier: Modifier = Modifier) {
         val navController = rememberNavController()
         val destinations = LocalAppProvider.current.destinations
-        val controllerListFeature = destinations.find<ControllerListFeature>()
+        val mainFeature = destinations.find<MainFeature>()
 
         Box(modifier.fillMaxSize()) {
-            NavHost(navController, controllerListFeature.featureRoute) {
-                with(controllerListFeature) { composable(navController, destinations) }
+            NavHost(navController, mainFeature.featureRoute) {
+                with(mainFeature) { composable(navController, destinations) }
             }
         }
     }
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
         CompositionLocalProvider(
             LocalAppProvider provides application.appProvider,
             LocalControllerListDependencies provides application.appProvider,
+            LocalSimulatorListDependencies provides application.appProvider,
             content = content
         )
     }

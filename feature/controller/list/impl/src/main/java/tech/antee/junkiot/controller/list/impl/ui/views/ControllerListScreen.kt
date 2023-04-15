@@ -48,7 +48,7 @@ fun ControllerListScreen(
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.displaySmall,
                     fontWeight = FontWeight.SemiBold,
-                    text = "Controllers" // TODO: to strings
+                    text = "Home" // TODO: to strings
                 )
                 VerticalSpacer(Dimensions.spacingVerticalXl)
                 LazyColumn( // TODO: move to a sерarate file

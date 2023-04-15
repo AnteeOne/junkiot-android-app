@@ -14,12 +14,16 @@ object Modules {
     const val commonUiComponents = ":common:ui-components"
     const val commonMultiCompose = ":common:multi-compose"
 
+    const val featureMainApi = ":feature:main:api"
+    const val featureMainImpl = ":feature:main:impl"
+
     const val featureControllerListApi = ":feature:controller:list:api"
     const val featureControllerListImpl = ":feature:controller:list:impl"
-    const val featureControllerAddApi = ":feature:controller:add:api"
-    const val featureControllerAddImpl = ":feature:controller:add:impl"
     const val featureControllerDetailsLightSensorApi = ":feature:controller:details:light-sensor:api"
     const val featureControllerDetailsLightSensorImpl = ":feature:controller:details:light-sensor:light:impl"
+
+    const val featureSimulatorListApi = ":feature:simulator:list:api"
+    const val featureSimulatorListImpl = ":feature:simulator:list:impl"
 
     const val libControllApi = ":lib:controll:api"
     const val libControllImpl = ":lib:controll:impl"
