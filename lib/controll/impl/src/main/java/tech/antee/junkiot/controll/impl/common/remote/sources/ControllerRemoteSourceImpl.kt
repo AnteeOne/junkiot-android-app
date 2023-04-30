@@ -1,10 +1,10 @@
-package tech.antee.junkiot.controll.impl.common.network.sources
+package tech.antee.junkiot.controll.impl.common.remote.sources
 
 import kotlinx.coroutines.flow.Flow
-import tech.antee.junkiot.controll.impl.common.network.dto.AddControllerDto
-import tech.antee.junkiot.controll.impl.common.network.dto.ControllerDto
-import tech.antee.junkiot.controll.impl.common.network.service.ControllerApi
-import tech.antee.junkiot.controll.impl.common.network.service.ControllerReactiveApi
+import tech.antee.junkiot.controll.impl.common.remote.dto.AddControllerDto
+import tech.antee.junkiot.controll.impl.common.remote.dto.ControllerDto
+import tech.antee.junkiot.controll.impl.common.remote.services.ControllerApi
+import tech.antee.junkiot.controll.impl.common.remote.services.ControllerReactiveApi
 import javax.inject.Inject
 
 class ControllerRemoteSourceImpl @Inject constructor(

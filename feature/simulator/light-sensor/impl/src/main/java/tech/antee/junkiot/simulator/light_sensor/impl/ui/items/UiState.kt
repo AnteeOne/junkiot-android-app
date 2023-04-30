@@ -1,11 +1,11 @@
 package tech.antee.junkiot.simulator.light_sensor.impl.ui.items
 
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
-import tech.antee.junkiot.simulator.light_sensor.models.LightSensorState
 
 data class UiState(
     val simulator: SimulatorItem?,
-    val lightSensorState: LightSensorState?,
+    val lightSensorState: LightSensorUiState?,
+    val lightPredictionsState: LightPredictionUiState,
     val sensorManagerState: LightSensorManagerState?,
     val isLoading: Boolean,
     val isError: Boolean
@@ -19,8 +19,12 @@ data class UiState(
         isError = false
     )
 
-    fun withLightSensorState(lightSensorState: LightSensorState) = copy(
+    fun withLightSensorState(lightSensorState: LightSensorUiState) = copy(
         lightSensorState = lightSensorState
+    )
+
+    fun withLightPredictionState(lightPredictionsState: LightPredictionUiState) = copy(
+        lightPredictionsState = lightPredictionsState
     )
 
     fun withLightSensorManagerState(lightSensorManagerState: LightSensorManagerState) = copy(
@@ -34,6 +38,7 @@ data class UiState(
         fun empty(): UiState = UiState(
             simulator = null,
             lightSensorState = null,
+            lightPredictionsState = LightPredictionUiState.Empty,
             sensorManagerState = null,
             isLoading = false,
             isError = false

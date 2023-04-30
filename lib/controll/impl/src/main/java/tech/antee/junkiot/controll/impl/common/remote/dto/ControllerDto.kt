@@ -1,4 +1,4 @@
-package tech.antee.junkiot.controll.impl.common.network.dto
+package tech.antee.junkiot.controll.impl.common.remote.dto
 
 data class ControllerDto(
     val controllerTypeId: Int,

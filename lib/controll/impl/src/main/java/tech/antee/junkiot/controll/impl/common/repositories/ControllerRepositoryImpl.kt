@@ -10,7 +10,7 @@ import tech.antee.junkiot.controll.impl.common.local.sources.SimulatorLocalSourc
 import tech.antee.junkiot.controll.impl.common.mappers.AddControllerDomainMapper
 import tech.antee.junkiot.controll.impl.common.mappers.ControllerDomainMapper
 import tech.antee.junkiot.controll.impl.common.mappers.ControllerSourceMapper
-import tech.antee.junkiot.controll.impl.common.network.sources.ControllerRemoteSource
+import tech.antee.junkiot.controll.impl.common.remote.sources.ControllerRemoteSource
 import javax.inject.Inject
 
 class ControllerRepositoryImpl @Inject constructor(

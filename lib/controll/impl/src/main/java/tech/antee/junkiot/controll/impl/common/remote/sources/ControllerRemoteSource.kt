@@ -1,8 +1,8 @@
-package tech.antee.junkiot.controll.impl.common.network.sources
+package tech.antee.junkiot.controll.impl.common.remote.sources
 
 import kotlinx.coroutines.flow.Flow
-import tech.antee.junkiot.controll.impl.common.network.dto.AddControllerDto
-import tech.antee.junkiot.controll.impl.common.network.dto.ControllerDto
+import tech.antee.junkiot.controll.impl.common.remote.dto.AddControllerDto
+import tech.antee.junkiot.controll.impl.common.remote.dto.ControllerDto
 
 interface ControllerRemoteSource {
 

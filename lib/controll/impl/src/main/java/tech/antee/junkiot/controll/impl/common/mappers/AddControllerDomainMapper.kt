@@ -1,7 +1,7 @@
 package tech.antee.junkiot.controll.impl.common.mappers
 
 import tech.antee.junkiot.controll.common.models.AddController
-import tech.antee.junkiot.controll.impl.common.network.dto.AddControllerDto
+import tech.antee.junkiot.controll.impl.common.remote.dto.AddControllerDto
 
 class AddControllerDomainMapper {
 

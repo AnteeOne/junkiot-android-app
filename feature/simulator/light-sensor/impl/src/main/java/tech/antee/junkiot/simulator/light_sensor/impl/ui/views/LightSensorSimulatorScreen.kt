@@ -1,5 +1,6 @@
 package tech.antee.junkiot.simulator.light_sensor.impl.ui.views
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,13 +18,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.LightSensorSimulatorViewModel
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Action
+import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Event
+import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightPredictionUiState
+import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightSensorUiState
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
-import tech.antee.junkiot.simulator.light_sensor.models.LightSensorState
 import tech.antee.junkiot.styles.theme.Dimensions
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
@@ -34,8 +38,13 @@ fun LightSensorSimulatorScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    val context = LocalContext.current
     LaunchedEffect(viewModel) {
-        viewModel.uiEvents.collect {}
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                is Event.ShowErrorSnackBar -> Toast.makeText(context, "Unknown error!", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     with(uiState) {
@@ -74,7 +83,7 @@ fun LightSensorSimulatorScreen(
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         text = when (lightSensorState) {
-                            is LightSensorState.Value -> String.format("%.2f", lightSensorState.lux)
+                            is LightSensorUiState.Value -> String.format("%.2f", lightSensorState.lux)
                             else -> "0"
                         }
                     )
@@ -84,6 +93,17 @@ fun LightSensorSimulatorScreen(
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,
                         text = "lux"
+                    )
+                    VerticalSpacer(Dimensions.spacingVerticalXxl)
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center,
+                        text = when (lightPredictionsState) {
+                            is LightPredictionUiState.Empty -> "Unknown"
+                            is LightPredictionUiState.Value -> lightPredictionsState.lightPrediction.name
+                        }
                     )
                 }
                 Button(
