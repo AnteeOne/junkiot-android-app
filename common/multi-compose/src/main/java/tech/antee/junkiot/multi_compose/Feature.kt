@@ -1,6 +1,7 @@
 package tech.antee.junkiot.multi_compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 

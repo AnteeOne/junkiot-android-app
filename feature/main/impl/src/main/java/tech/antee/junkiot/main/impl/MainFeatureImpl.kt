@@ -27,6 +27,7 @@ import tech.antee.junkiot.multi_compose.Destinations
 import tech.antee.junkiot.multi_compose.find
 import tech.antee.junkiot.multi_compose.ui.LocalNavigationBarState
 import tech.antee.junkiot.multi_compose.ui.rememberNavigationBarState
+import tech.antee.junkiot.simulator.light_sensor.ui.LightSensorSimulatorFeature
 import tech.antee.junkiot.simulator.list.SimulatorListFeature
 import javax.inject.Inject
 
@@ -40,15 +41,17 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
     ) {
         val controllersFeature = destinations.find<ControllerListFeature>()
         val simulatorsFeature = destinations.find<SimulatorListFeature>()
-        // TODO: add the remaining screens
+//        val settingsFeature = destinations.find<SettingsFeature>() TODO: add the remaining screens
+        val lightSensorDetailsFeature = destinations.find<LightSensorSimulatorFeature>()
 
         val navigationItems = listOf(
             NavigationItem(R.drawable.ic_home, R.string.nav_home, controllersFeature.featureRoute),
             NavigationItem(R.drawable.ic_sensor, R.string.nav_simulator_mode, simulatorsFeature.featureRoute),
             NavigationItem(R.drawable.ic_settings, R.string.nav_settings, "settings")
         )
+        // TODO(ISSUE): https://github.com/AnteeOne/junkiot-android-app/issues/4
         var selectedNavItem by remember { mutableStateOf(navigationItems[0]) }
-        val bottomNavController = rememberNavController().apply {
+        val mainNavController = rememberNavController().apply {
             addOnDestinationChangedListener { _, destination, _ ->
                 navigationItems.find { it.route == destination.route }?.let {
                     selectedNavItem = it
@@ -56,26 +59,28 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
             }
         }
         CompositionLocalProvider(
+            // TODO: handle in nav bar state by navigation args
             LocalNavigationBarState provides rememberNavigationBarState(initialValue = true)
         ) {
             NavigationBarScaffold(
                 items = navigationItems,
                 selectedItem = selectedNavItem,
                 onClick = {
-                    bottomNavController.navigate(it.route) {
-                        popUpTo(bottomNavController.graph.findStartDestination().id) { saveState = true }
+                    mainNavController.navigate(it.route) {
+                        popUpTo(mainNavController.graph.findStartDestination().id) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
                     }
                 }
             ) {
                 NavHost(
-                    navController = bottomNavController,
+                    navController = mainNavController,
                     startDestination = controllersFeature.featureRoute
                 ) {
-                    with(controllersFeature) { composable(navController, destinations) }
-                    with(simulatorsFeature) { composable(navController, destinations) }
+                    with(controllersFeature) { composable(mainNavController, destinations) }
+                    with(simulatorsFeature) { composable(mainNavController, destinations) }
                     composable("settings") { FeaturePlaceholder("Settings") }
+                    with(lightSensorDetailsFeature) { composable(mainNavController, destinations) }
                 }
             }
         }

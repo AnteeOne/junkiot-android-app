@@ -20,7 +20,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import tech.antee.junkiot.controll.common.models.ControllerType
 import tech.antee.junkiot.simulator.list.impl.ui.SimulatorListViewModel
+import tech.antee.junkiot.simulator.list.impl.ui.items.Event
 import tech.antee.junkiot.styles.theme.Dimensions
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
@@ -28,12 +30,17 @@ import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 @Composable
 fun SimulatorListScreen(
     viewModel: SimulatorListViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavToDetails: (id: Int, controllerType: ControllerType) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(viewModel) {
-        viewModel.uiEvents.collect {}
+        viewModel.uiEvents.collect { event ->
+            when(event) {
+                is Event.OnNavToDetails -> onNavToDetails(event.id, event.controllerType)
+            }
+        }
     }
 
     with(uiState) {
@@ -62,15 +69,14 @@ fun SimulatorListScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .animateItemPlacement(),
-                            simulatorItem = item
+                            simulatorItem = item,
+                            onClick = onNavToDetails
                         )
                         Spacer(modifier = Modifier.height(Dimensions.spacingVerticalXs))
                     }
                 }
             }
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
+            if (isLoading) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 }

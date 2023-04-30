@@ -25,7 +25,7 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
     private val _uiEvents = Channel<Event>(capacity = Channel.UNLIMITED)
     val uiEvents: Flow<Event> = _uiEvents.receiveAsFlow()
 
-    protected abstract fun onAction(action: Action)
+    abstract fun onAction(action: Action)
 
     protected open fun onLoading(inProgress: Boolean) {}
 

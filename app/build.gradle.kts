@@ -31,6 +31,7 @@ dependencies {
     projectImplementation(Modules.featureMainImpl)
     projectImplementation(Modules.featureControllerListImpl)
     projectImplementation(Modules.featureSimulatorListImpl)
+    projectImplementation(Modules.featureSimulatorLightSensorImpl)
 
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.foundation)

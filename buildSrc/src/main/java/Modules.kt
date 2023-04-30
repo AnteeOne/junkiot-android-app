@@ -24,6 +24,8 @@ object Modules {
 
     const val featureSimulatorListApi = ":feature:simulator:list:api"
     const val featureSimulatorListImpl = ":feature:simulator:list:impl"
+    const val featureSimulatorLightSensorApi = ":feature:simulator:light-sensor:api"
+    const val featureSimulatorLightSensorImpl = ":feature:simulator:light-sensor:impl"
 
     const val libControllApi = ":lib:controll:api"
     const val libControllImpl = ":lib:controll:impl"
