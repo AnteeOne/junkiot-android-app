@@ -1,5 +1,7 @@
 package tech.antee.junkiot.controller.list.impl.ui.views
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -67,13 +70,16 @@ fun ControllerItemView(
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    val textColor by animateColorAsState(
+                        targetValue = when {
+                            controllerItem.isOnline -> colorOnline
+                            else -> MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                        },
+                        animationSpec = tween(ControllerItemViewDefaults.ANIMATION_DURATION)
+                    )
                     Text(
                         text = if (controllerItem.isOnline) "online" else "offline",
-                        color = if (controllerItem.isOnline) {
-                            colorOnline
-                        } else {
-                            MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
-                        },
+                        color = textColor,
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
@@ -87,6 +93,10 @@ fun ControllerItemView(
             )
         }
     }
+}
+
+private object ControllerItemViewDefaults {
+    const val ANIMATION_DURATION = 500
 }
 
 @Preview(showBackground = true)
