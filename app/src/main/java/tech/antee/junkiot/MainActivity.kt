@@ -14,6 +14,7 @@ import tech.antee.junkiot.controller.list.impl.di.LocalControllerListDependencie
 import tech.antee.junkiot.di.LocalAppProvider
 import tech.antee.junkiot.main.MainFeature
 import tech.antee.junkiot.multi_compose.find
+import tech.antee.junkiot.simulator.light_sensor.impl.di.LocalLightSensorSimulatorDependencies
 import tech.antee.junkiot.simulator.list.impl.di.LocalSimulatorListDependencies
 import tech.antee.junkiot.styles.theme.JunkiotTheme
 
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
             LocalAppProvider provides application.appProvider,
             LocalControllerListDependencies provides application.appProvider,
             LocalSimulatorListDependencies provides application.appProvider,
+            LocalLightSensorSimulatorDependencies provides application.appProvider,
             content = content
         )
     }

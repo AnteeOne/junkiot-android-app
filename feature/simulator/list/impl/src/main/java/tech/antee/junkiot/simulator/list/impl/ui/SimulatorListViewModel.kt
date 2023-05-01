@@ -24,7 +24,7 @@ class SimulatorListViewModel @Inject constructor(
 
     override fun onAction(action: Action) {
         when (action) {
-            is Action.OnItemClick -> {}
+            is Action.OnItemClick -> emitEvent(Event.OnNavToDetails(action.id, action.controllerType))
         }
     }
 

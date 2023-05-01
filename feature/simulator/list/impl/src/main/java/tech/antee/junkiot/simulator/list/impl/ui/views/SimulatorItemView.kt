@@ -32,10 +32,13 @@ import tech.antee.junkiot.ui_components.R as UiComponentsR
 @Composable
 fun SimulatorItemView(
     modifier: Modifier = Modifier,
-    simulatorItem: SimulatorItem
+    simulatorItem: SimulatorItem,
+    onClick: (id: Int, controllerType: ControllerType) -> Unit
 ) {
     Card(
-        onClick = {},
+        onClick = {
+            onClick(simulatorItem.id, simulatorItem.controllerType)
+        },
         modifier = modifier,
         shape = RoundedCornerShape(Dimensions.cornersM),
         backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -94,7 +97,8 @@ private fun Preview() {
                     controllerType = ControllerType.LIGHT_SENSOR,
                     id = 23,
                     name = "Bedroom sensor",
-                )
+                ),
+                onClick = { _, _ -> }
             )
             VerticalSpacer(height = Dimensions.spacingHorizontalXs)
             SimulatorItemView(
@@ -103,7 +107,8 @@ private fun Preview() {
                     controllerType = ControllerType.LIGHT_SENSOR,
                     id = 23,
                     name = "Kitchen sensor"
-                )
+                ),
+                onClick = { _, _ -> }
             )
         }
     }

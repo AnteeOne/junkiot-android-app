@@ -25,7 +25,7 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
     private val _uiEvents = Channel<Event>(capacity = Channel.UNLIMITED)
     val uiEvents: Flow<Event> = _uiEvents.receiveAsFlow()
 
-    protected abstract fun onAction(action: Action)
+    abstract fun onAction(action: Action)
 
     protected open fun onLoading(inProgress: Boolean) {}
 
@@ -34,6 +34,7 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
     }
 
     protected fun launchSafely(
+        scope: CoroutineScope = viewModelScope,
         context: CoroutineContext = EmptyCoroutineContext,
         start: CoroutineStart = CoroutineStart.DEFAULT,
         onLoading: (Boolean) -> Unit = ::onLoading,
@@ -41,7 +42,7 @@ abstract class BaseViewModel<State, Event, Action> : ViewModel() {
         onFinally: () -> Unit = {},
         block: suspend CoroutineScope.() -> Unit
     ): Job = launchSecurely(
-        scope = viewModelScope,
+        scope = scope,
         context = context,
         start = start,
         onLoading = onLoading,
