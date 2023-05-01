@@ -10,8 +10,6 @@ interface ControllerRepository {
 
     val simulators: Flow<List<Controller>>
 
-    suspend fun observeRemoteControllers()
-
     suspend fun addController(add: AddController): Controller
 
     suspend fun deleteController(id: Int)

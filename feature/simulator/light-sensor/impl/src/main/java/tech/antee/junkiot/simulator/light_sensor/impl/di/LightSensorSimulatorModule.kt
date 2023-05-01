@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import tech.antee.junkiot.di.qualifiers.ApplicationContext
 import tech.antee.junkiot.di.scopes.FeatureScope
-import tech.antee.junkiot.simulator.light_sensor.impl.ui.LightSensorManagerImpl
+import tech.antee.junkiot.simulator.light_sensor.impl.managers.LightSensorManagerImpl
 import tech.antee.junkiot.simulator.light_sensor.managers.LightSensorManager
 
 @Module(

@@ -1,13 +1,15 @@
 package tech.antee.junkiot.controll.common.usecases
 
+import kotlinx.coroutines.flow.Flow
+import tech.antee.junkiot.controll.common.models.Controller
 import tech.antee.junkiot.controll.common.repositories.ControllerRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ObserveRemoteControllersUsecase @Inject constructor(
+class ObserveControllersUsecase @Inject constructor(
     private val repository: ControllerRepository
 ) {
 
-    suspend operator fun invoke(): Unit = repository.observeRemoteControllers()
+    operator fun invoke(): Flow<List<Controller>> = repository.controllers
 }

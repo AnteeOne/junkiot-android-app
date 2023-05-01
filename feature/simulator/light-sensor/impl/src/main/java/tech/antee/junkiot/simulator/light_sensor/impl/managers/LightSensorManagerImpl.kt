@@ -1,4 +1,4 @@
-package tech.antee.junkiot.simulator.light_sensor.impl.ui
+package tech.antee.junkiot.simulator.light_sensor.impl.managers
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 @FlowPreview
 class LightSensorManagerImpl @Inject constructor(
-    private val sensorManager: SensorManager
+    private val sensorManager: SensorManager,
+    private val settings: LightSensorManager.Settings = DefaultSettings
 ) : LightSensorManager {
 
     private val lightSensor: Sensor by lazy {
@@ -54,10 +55,10 @@ class LightSensorManagerImpl @Inject constructor(
         }
     }
         .buffer(capacity = Channel.UNLIMITED)
-        .debounce(LightSensorManagerSettings.SENSOR_VALUES_DELAY)
+        .debounce(settings.valuesDebounceMs)
     override val lightSensorValues: Flow<LightSensorState> = _lightSensorValues
 
-    private object LightSensorManagerSettings {
-        const val SENSOR_VALUES_DELAY = 300L
+    private object DefaultSettings : LightSensorManager.Settings {
+        override val valuesDebounceMs: Long = 500L
     }
 }
