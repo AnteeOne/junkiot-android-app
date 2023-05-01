@@ -38,6 +38,7 @@ class LightSensorSimulatorViewModel @Inject constructor(
     override fun onAction(action: Action) {
         when (action) {
             Action.OnStartBtnClick -> onStartBtnClick()
+            Action.OnBackBtnClick -> onBackBtnClick()
         }
     }
 
@@ -82,6 +83,10 @@ class LightSensorSimulatorViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun onBackBtnClick() {
+        emitEvent(Event.NavBack)
     }
 
     private fun observeLightSensorManagerState() {

@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.LightSensorSimulatorViewModel
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Action
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Event
@@ -29,11 +28,13 @@ import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightPredictionUi
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightSensorUiState
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
 import tech.antee.junkiot.styles.theme.Dimensions
+import tech.antee.junkiot.ui.views.app_bar.CenteredAppBarWithBackButton
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @Composable
 fun LightSensorSimulatorScreen(
     viewModel: LightSensorSimulatorViewModel,
+    onNavBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -43,38 +44,29 @@ fun LightSensorSimulatorScreen(
         viewModel.uiEvents.collect { event ->
             when (event) {
                 is Event.ShowErrorSnackBar -> Toast.makeText(context, "Unknown error!", Toast.LENGTH_LONG).show()
+                is Event.NavBack -> onNavBack()
             }
         }
     }
 
     with(uiState) {
         Box(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(
-                    horizontal = Dimensions.paddingVerticalM,
-                    vertical = Dimensions.paddingVerticalXl
-                )
+            modifier = modifier.fillMaxSize()
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
+                CenteredAppBarWithBackButton(
+                    title = simulator?.name,
+                    onBack = { viewModel.onAction(Action.OnBackBtnClick) }
+                )
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
                         .weight(1f)
+                        .padding(horizontal = Dimensions.paddingVerticalM)
                 ) {
-                    simulator?.apply {
-                        Text(
-                            color = MaterialTheme.colorScheme.onBackground,
-                            style = MaterialTheme.typography.displaySmall,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontWeight = FontWeight.SemiBold,
-                            text = name
-                        )
-                    }
                     VerticalSpacer(Dimensions.spacingVerticalXxl)
                     Text(
                         modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -107,7 +99,10 @@ fun LightSensorSimulatorScreen(
                     )
                 }
                 Button(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = Dimensions.paddingHorizontalM)
+                        .padding(bottom = Dimensions.paddingVerticalXl),
                     enabled = !isLoading,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = when (sensorManagerState) {

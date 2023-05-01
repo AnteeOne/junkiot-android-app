@@ -1,21 +1,16 @@
 package tech.antee.junkiot.simulator.list.impl.ui.views
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +26,7 @@ import tech.antee.junkiot.controll.common.models.ControllerType
 import tech.antee.junkiot.simulator.list.impl.ui.SimulatorListViewModel
 import tech.antee.junkiot.simulator.list.impl.ui.items.Event
 import tech.antee.junkiot.styles.theme.Dimensions
+import tech.antee.junkiot.ui.views.app_bar.CenteredAppBar
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -44,7 +40,7 @@ fun SimulatorListScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.uiEvents.collect { event ->
-            when(event) {
+            when (event) {
                 is Event.OnNavToDetails -> onNavToDetails(event.id, event.controllerType)
             }
         }
@@ -53,27 +49,23 @@ fun SimulatorListScreen(
     with(uiState) {
         Box(modifier = modifier.fillMaxSize()) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Dimensions.paddingVerticalM)
+                modifier = Modifier.fillMaxSize()
             ) {
-                VerticalSpacer(Dimensions.spacingVerticalXl)
-                Text(
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.displaySmall,
-                    fontWeight = FontWeight.SemiBold,
-                    text = "Simulators" // TODO: to strings
-                )
-                VerticalSpacer(Dimensions.spacingVerticalXl)
+                CenteredAppBar(title = "Simulators")
                 LazyVerticalGrid(
                     modifier = Modifier.weight(1f),
+                    contentPadding = PaddingValues(
+                        start = Dimensions.paddingVerticalM,
+                        end = Dimensions.paddingVerticalM,
+                        top = Dimensions.paddingVerticalM
+                    ),
                     horizontalArrangement = Arrangement.spacedBy(Dimensions.spacingHorizontalXs),
                     verticalArrangement = Arrangement.spacedBy(Dimensions.spacingHorizontalXs),
-                    columns = GridCells.Adaptive(minSize = 128.dp)
+                    columns = GridCells.Adaptive(minSize = 180.dp)
                 ) {
                     items(
                         items = simulators,
-                        key = { simulator -> simulator.id },
+                        key = { simulator -> simulator.id }
                     ) { item ->
                         SimulatorItemView(
                             modifier = Modifier
