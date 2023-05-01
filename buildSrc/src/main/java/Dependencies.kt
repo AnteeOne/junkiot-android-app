@@ -40,7 +40,7 @@ object Versions {
     const val mpAndroidChart = "v3.1.0"
     const val compose = "1.1.1"
     const val composeMaterial = "1.0.1"
-    const val accompanist = "0.23.1"
+    const val accompanist = "0.25.1"
     const val coil = "2.3.0"
 
     const val mockito = "4.0.0"
