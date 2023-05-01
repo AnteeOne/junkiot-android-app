@@ -1,14 +1,20 @@
 package tech.antee.junkiot.simulator.list.impl.ui.views
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import tech.antee.junkiot.controll.common.models.ControllerType
 import tech.antee.junkiot.simulator.list.impl.ui.SimulatorListViewModel
 import tech.antee.junkiot.simulator.list.impl.ui.items.Event
@@ -58,12 +65,15 @@ fun SimulatorListScreen(
                     text = "Simulators" // TODO: to strings
                 )
                 VerticalSpacer(Dimensions.spacingVerticalXl)
-                LazyColumn( // TODO: move to a sерarate file
-                    modifier = Modifier.weight(1f)
+                LazyVerticalGrid(
+                    modifier = Modifier.weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(Dimensions.spacingHorizontalXs),
+                    verticalArrangement = Arrangement.spacedBy(Dimensions.spacingHorizontalXs),
+                    columns = GridCells.Adaptive(minSize = 128.dp)
                 ) {
                     items(
                         items = simulators,
-                        key = { simulator -> simulator.id }
+                        key = { simulator -> simulator.id },
                     ) { item ->
                         SimulatorItemView(
                             modifier = Modifier
@@ -72,7 +82,6 @@ fun SimulatorListScreen(
                             simulatorItem = item,
                             onClick = onNavToDetails
                         )
-                        Spacer(modifier = Modifier.height(Dimensions.spacingVerticalXs))
                     }
                 }
             }
