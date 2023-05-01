@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import tech.antee.junkiot.controller.list.impl.ui.ControllerListViewModel
 import tech.antee.junkiot.styles.theme.Dimensions
 import tech.antee.junkiot.ui.views.app_bar.CenteredAppBar
-import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -44,7 +43,7 @@ fun ControllerListScreen(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = Dimensions.paddingVerticalM)
-                        .padding(top = Dimensions.paddingVerticalL)
+                        .padding(top = Dimensions.paddingVerticalM)
                 ) {
                     items(
                         items = controllers,

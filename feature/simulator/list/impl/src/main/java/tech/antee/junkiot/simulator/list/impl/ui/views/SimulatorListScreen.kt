@@ -7,27 +7,23 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import tech.antee.junkiot.controll.common.models.ControllerType
 import tech.antee.junkiot.simulator.list.impl.ui.SimulatorListViewModel
 import tech.antee.junkiot.simulator.list.impl.ui.items.Event
 import tech.antee.junkiot.styles.theme.Dimensions
-import tech.antee.junkiot.ui.views.app_bar.CenteredAppBar
-import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
+import tech.antee.junkiot.ui.views.app_bar.CenteredAppBarWithAction
+import tech.antee.junkiot.ui_components.R as UiR
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -51,7 +47,11 @@ fun SimulatorListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CenteredAppBar(title = "Simulators")
+                CenteredAppBarWithAction(
+                    title = "Simulators",
+                    iconId = UiR.drawable.ic_add,
+                    onActionBtnClick = { /* TODO */ }
+                )
                 LazyVerticalGrid(
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(

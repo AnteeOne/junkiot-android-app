@@ -1,5 +1,6 @@
 package tech.antee.junkiot.ui.views.app_bar
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.IconButton
@@ -56,13 +57,46 @@ fun CenteredAppBarWithBackButton(
     title = title,
     actions = actions,
     navigationIcon = {
-        IconButton(onClick = onBack) {
-            Icon(
-                modifier = Modifier.size(Dimensions.sizeIconM),
-                painter = painterResource(R.drawable.ic_arrow_left),
-                contentDescription = "Back",
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+        AppBarIconButton(
+            iconId = R.drawable.ic_arrow_left,
+            contentDescription = "Back",
+            onClick = onBack
+        )
     }
 )
+
+@Composable
+fun CenteredAppBarWithAction(
+    modifier: Modifier = Modifier,
+    title: String?,
+    @DrawableRes iconId: Int,
+    contextDescription: String? = null,
+    onActionBtnClick: () -> Unit
+) = CenteredAppBar(
+    modifier = modifier,
+    title = title,
+    actions = {
+        AppBarIconButton(
+            iconId = iconId,
+            contentDescription = contextDescription,
+            onClick = onActionBtnClick
+        )
+    }
+)
+
+@Composable
+fun AppBarIconButton(
+    modifier: Modifier = Modifier,
+    @DrawableRes iconId: Int,
+    contentDescription: String? = null,
+    onClick: () -> Unit
+) {
+    IconButton(onClick) {
+        Icon(
+            modifier = modifier.size(Dimensions.sizeIconL),
+            painter = painterResource(iconId),
+            contentDescription = contentDescription,
+            tint = MaterialTheme.colorScheme.primary
+        )
+    }
+}
