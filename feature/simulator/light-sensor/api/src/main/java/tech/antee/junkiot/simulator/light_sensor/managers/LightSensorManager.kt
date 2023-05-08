@@ -9,4 +9,11 @@ interface LightSensorManager {
     val lightSensorManagerState: Flow<LightSensorManagerState>
 
     val lightSensorValues: Flow<LightSensorState>
+
+    interface Settings {
+
+        val valuesDebounceMs: Long
+
+        val valuesCacheSize: Int
+    }
 }

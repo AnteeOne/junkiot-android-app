@@ -21,7 +21,7 @@ class SimulatorUiMapper @Inject constructor() {
 
     fun map(model: LightSensorState): LightSensorUiState = when (model) {
         is LightSensorState.Empty -> LightSensorUiState.Empty
-        is LightSensorState.Value -> LightSensorUiState.Value(model.lux)
+        is LightSensorState.Value -> LightSensorUiState.Value(model.luxes.toList())
     }
 
     fun map(model: LightSensorPredictionValue?): LightPredictionUiState = when (model) {

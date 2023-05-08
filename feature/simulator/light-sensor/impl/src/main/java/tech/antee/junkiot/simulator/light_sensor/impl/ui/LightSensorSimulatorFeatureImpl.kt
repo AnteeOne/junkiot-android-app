@@ -35,7 +35,12 @@ class LightSensorSimulatorFeatureImpl @Inject constructor() : LightSensorSimulat
                     .create(deps, controllerId)
                     .viewModel
             }
-            LightSensorSimulatorScreen(viewModel)
+            LightSensorSimulatorScreen(
+                viewModel = viewModel,
+                onNavBack = {
+                    navController.navigateUp()
+                }
+            )
         }
     }
 }

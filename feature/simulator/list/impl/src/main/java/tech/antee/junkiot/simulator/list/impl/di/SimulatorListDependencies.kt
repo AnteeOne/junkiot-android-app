@@ -2,12 +2,12 @@ package tech.antee.junkiot.simulator.list.impl.di
 
 import androidx.compose.runtime.compositionLocalOf
 import tech.antee.junkiot.controll.common.usecases.AddControllerUsecase
-import tech.antee.junkiot.controll.common.usecases.GetReactiveSimulatorsUsecase
+import tech.antee.junkiot.controll.common.usecases.ObserveSimulatorsUsecase
 import tech.antee.junkiot.di.Dependencies
 
 interface SimulatorListDependencies : Dependencies {
 
-    val getReactiveSimulatorsUsecase: GetReactiveSimulatorsUsecase
+    val observeSimulatorsUsecase: ObserveSimulatorsUsecase
 
     val addControllerUsecase: AddControllerUsecase
 }

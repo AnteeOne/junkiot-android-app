@@ -5,7 +5,7 @@ import tech.antee.junkiot.controll.light_sensor.models.LightSensorPredictionValu
 import tech.antee.junkiot.controll.light_sensor.repositories.LightSensorRepository
 import javax.inject.Inject
 
-class GetReactiveLightPredictionsUsecase @Inject constructor(
+class ObserveLightPredictionsUsecase @Inject constructor(
     private val repository: LightSensorRepository
 ) {
 

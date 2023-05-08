@@ -3,10 +3,10 @@ package tech.antee.junkiot.simulator.light_sensor.impl.ui
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.onStart
-import tech.antee.junkiot.controll.common.usecases.GetReactiveSimulatorUsecase
+import tech.antee.junkiot.controll.common.usecases.ObserveSimulatorUsecase
 import tech.antee.junkiot.controll.light_sensor.models.Lux
 import tech.antee.junkiot.controll.light_sensor.usecases.AddLightSensorValueUsecase
-import tech.antee.junkiot.controll.light_sensor.usecases.GetReactiveLightPredictionsUsecase
+import tech.antee.junkiot.controll.light_sensor.usecases.ObserveLightPredictionsUsecase
 import tech.antee.junkiot.simulator.light_sensor.impl.di.ControllerId
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Action
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Event
@@ -19,9 +19,9 @@ import javax.inject.Inject
 
 class LightSensorSimulatorViewModel @Inject constructor(
     @ControllerId private val controllerId: Int,
-    private val getReactiveSimulatorUsecase: GetReactiveSimulatorUsecase,
+    private val observeSimulatorUsecase: ObserveSimulatorUsecase,
     private val addLightSensorValueUsecase: AddLightSensorValueUsecase,
-    private val getReactiveLightPredictionsUsecase: GetReactiveLightPredictionsUsecase,
+    private val observeLightPredictionsUsecase: ObserveLightPredictionsUsecase,
     private val lightSensorManager: LightSensorManager,
     private val mapper: SimulatorUiMapper
 ) : BaseViewModel<UiState, Event, Action>() {
@@ -38,12 +38,13 @@ class LightSensorSimulatorViewModel @Inject constructor(
     override fun onAction(action: Action) {
         when (action) {
             Action.OnStartBtnClick -> onStartBtnClick()
+            Action.OnBackBtnClick -> onBackBtnClick()
         }
     }
 
     private fun observeSimulator() {
         launchSafely {
-            getReactiveSimulatorUsecase(controllerId)
+            observeSimulatorUsecase(controllerId)
                 .onStart { updateState { it.withLoading(true) } }
                 .collect { controller ->
                     updateState { it.withSimulatorItem(mapper.map(controller)) }
@@ -67,8 +68,8 @@ class LightSensorSimulatorViewModel @Inject constructor(
                 ) {
                     lightSensorManager.lightSensorValues.collect { lightSensorState ->
                         updateState { it.withLightSensorState(mapper.map(lightSensorState)) }
-                        if(lightSensorState is LightSensorState.Value) {
-                            addLightSensorValueUsecase(controllerId, Lux(lightSensorState.lux.toInt()))
+                        if (lightSensorState is LightSensorState.Value) {
+                            addLightSensorValueUsecase(controllerId, Lux(lightSensorState.luxes.last().toInt()))
                         }
                     }
                 }
@@ -76,12 +77,16 @@ class LightSensorSimulatorViewModel @Inject constructor(
                     scope = this,
                     onError = ::onObservingLightSensorValuesError
                 ) {
-                    getReactiveLightPredictionsUsecase(controllerId).collect { predictions ->
+                    observeLightPredictionsUsecase(controllerId).collect { predictions ->
                         updateState { it.withLightPredictionState(mapper.map(predictions.lastOrNull())) }
                     }
                 }
             }
         }
+    }
+
+    private fun onBackBtnClick() {
+        emitEvent(Event.NavBack)
     }
 
     private fun observeLightSensorManagerState() {

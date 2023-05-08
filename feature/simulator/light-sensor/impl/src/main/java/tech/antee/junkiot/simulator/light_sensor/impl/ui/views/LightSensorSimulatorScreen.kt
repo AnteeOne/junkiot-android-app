@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.LightSensorSimulatorViewModel
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Action
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Event
@@ -29,11 +29,14 @@ import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightPredictionUi
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightSensorUiState
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
 import tech.antee.junkiot.styles.theme.Dimensions
+import tech.antee.junkiot.ui.views.app_bar.CenteredAppBarWithBackButton
+import tech.antee.junkiot.ui.views.chart.SensorValuesChartCard
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @Composable
 fun LightSensorSimulatorScreen(
     viewModel: LightSensorSimulatorViewModel,
+    onNavBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -43,38 +46,40 @@ fun LightSensorSimulatorScreen(
         viewModel.uiEvents.collect { event ->
             when (event) {
                 is Event.ShowErrorSnackBar -> Toast.makeText(context, "Unknown error!", Toast.LENGTH_LONG).show()
+                is Event.NavBack -> onNavBack()
             }
         }
     }
 
     with(uiState) {
         Box(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(
-                    horizontal = Dimensions.paddingVerticalM,
-                    vertical = Dimensions.paddingVerticalXl
-                )
+            modifier = modifier.fillMaxSize()
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
+                CenteredAppBarWithBackButton(
+                    title = simulator?.name,
+                    onBack = { viewModel.onAction(Action.OnBackBtnClick) }
+                )
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
                         .weight(1f)
+                        .padding(horizontal = Dimensions.paddingVerticalM)
                 ) {
-                    simulator?.apply {
-                        Text(
-                            color = MaterialTheme.colorScheme.onBackground,
-                            style = MaterialTheme.typography.displaySmall,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontWeight = FontWeight.SemiBold,
-                            text = name
-                        )
-                    }
+                    VerticalSpacer(Dimensions.spacingVerticalXxl)
+                    SensorValuesChartCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Dimensions.paddingVerticalM)
+                            .aspectRatio(1f),
+                        data = when(lightSensorState) {
+                            is LightSensorUiState.Value -> lightSensorState.luxes.map{ it.toInt()}
+                            else -> listOf()
+                        }
+                    )
                     VerticalSpacer(Dimensions.spacingVerticalXxl)
                     Text(
                         modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -83,7 +88,7 @@ fun LightSensorSimulatorScreen(
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         text = when (lightSensorState) {
-                            is LightSensorUiState.Value -> String.format("%.2f", lightSensorState.lux)
+                            is LightSensorUiState.Value -> String.format("%.2f", lightSensorState.luxes.last())
                             else -> "0"
                         }
                     )
@@ -107,7 +112,10 @@ fun LightSensorSimulatorScreen(
                     )
                 }
                 Button(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = Dimensions.paddingHorizontalM)
+                        .padding(bottom = Dimensions.paddingVerticalXl),
                     enabled = !isLoading,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = when (sensorManagerState) {

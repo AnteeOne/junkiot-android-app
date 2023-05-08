@@ -11,18 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import tech.antee.junkiot.controller.list.impl.ui.ControllerListViewModel
 import tech.antee.junkiot.styles.theme.Dimensions
-import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
+import tech.antee.junkiot.ui.views.app_bar.CenteredAppBar
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -39,20 +36,14 @@ fun ControllerListScreen(
     with(uiState) {
         Box(modifier = modifier.fillMaxSize()) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Dimensions.paddingVerticalM)
+                modifier = Modifier.fillMaxSize()
             ) {
-                VerticalSpacer(Dimensions.spacingVerticalXl)
-                Text(
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.displaySmall,
-                    fontWeight = FontWeight.SemiBold,
-                    text = "Home" // TODO: to strings
-                )
-                VerticalSpacer(Dimensions.spacingVerticalXl)
+                CenteredAppBar(title = "Home") // TODO: to strings
                 LazyColumn( // TODO: move to a sерarate file
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = Dimensions.paddingVerticalM)
+                        .padding(top = Dimensions.paddingVerticalM)
                 ) {
                     items(
                         items = controllers,
