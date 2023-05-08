@@ -69,7 +69,7 @@ class LightSensorSimulatorViewModel @Inject constructor(
                     lightSensorManager.lightSensorValues.collect { lightSensorState ->
                         updateState { it.withLightSensorState(mapper.map(lightSensorState)) }
                         if (lightSensorState is LightSensorState.Value) {
-                            addLightSensorValueUsecase(controllerId, Lux(lightSensorState.lux.toInt()))
+                            addLightSensorValueUsecase(controllerId, Lux(lightSensorState.luxes.last().toInt()))
                         }
                     }
                 }

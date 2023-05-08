@@ -13,5 +13,7 @@ interface LightSensorManager {
     interface Settings {
 
         val valuesDebounceMs: Long
+
+        val valuesCacheSize: Int
     }
 }

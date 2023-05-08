@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.debounce
 import tech.antee.junkiot.simulator.light_sensor.managers.LightSensorManager
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorState
+import java.util.*
 import javax.inject.Inject
 
 @FlowPreview
@@ -32,12 +33,17 @@ class LightSensorManagerImpl @Inject constructor(
         MutableStateFlow(LightSensorManagerState.Disabled)
     override val lightSensorManagerState: Flow<LightSensorManagerState> = _lightSensorManagerState
 
+    private val _lightSensorValuesCache = LinkedList<Float>()
     private val _lightSensorValues = callbackFlow {
         val listener = object : SensorEventListener {
 
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
-                    trySendBlocking(LightSensorState.Value(event.values[0]))
+                    if (_lightSensorValuesCache.count() == settings.valuesCacheSize) {
+                        _lightSensorValuesCache.removeFirst()
+                    }
+                    _lightSensorValuesCache.add(event.values[0])
+                    trySendBlocking(LightSensorState.Value(_lightSensorValuesCache))
                 }
             }
 
@@ -60,5 +66,7 @@ class LightSensorManagerImpl @Inject constructor(
 
     private object DefaultSettings : LightSensorManager.Settings {
         override val valuesDebounceMs: Long = 500L
+
+        override val valuesCacheSize: Int = 30
     }
 }

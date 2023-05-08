@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,6 +30,7 @@ import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.LightSensorUiStat
 import tech.antee.junkiot.simulator.light_sensor.models.LightSensorManagerState
 import tech.antee.junkiot.styles.theme.Dimensions
 import tech.antee.junkiot.ui.views.app_bar.CenteredAppBarWithBackButton
+import tech.antee.junkiot.ui.views.chart.SensorValuesChartCard
 import tech.antee.junkiot.ui.views.spacing.VerticalSpacer
 
 @Composable
@@ -68,6 +70,17 @@ fun LightSensorSimulatorScreen(
                         .padding(horizontal = Dimensions.paddingVerticalM)
                 ) {
                     VerticalSpacer(Dimensions.spacingVerticalXxl)
+                    SensorValuesChartCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Dimensions.paddingVerticalM)
+                            .aspectRatio(1f),
+                        data = when(lightSensorState) {
+                            is LightSensorUiState.Value -> lightSensorState.luxes.map{ it.toInt()}
+                            else -> listOf()
+                        }
+                    )
+                    VerticalSpacer(Dimensions.spacingVerticalXxl)
                     Text(
                         modifier = Modifier.align(Alignment.CenterHorizontally),
                         color = MaterialTheme.colorScheme.onBackground,
@@ -75,7 +88,7 @@ fun LightSensorSimulatorScreen(
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         text = when (lightSensorState) {
-                            is LightSensorUiState.Value -> String.format("%.2f", lightSensorState.lux)
+                            is LightSensorUiState.Value -> String.format("%.2f", lightSensorState.luxes.last())
                             else -> "0"
                         }
                     )
