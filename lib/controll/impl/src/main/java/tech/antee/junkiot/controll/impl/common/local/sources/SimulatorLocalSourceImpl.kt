@@ -10,7 +10,7 @@ class SimulatorLocalSourceImpl @Inject constructor() : SimulatorLocalSource {
 
     private val mockList = listOf(
         ControllerEntity(
-            ControllerType.LIGHT_SENSOR,
+            ControllerType.LightSensor,
             1,
             "Bedroom sensor",
             true

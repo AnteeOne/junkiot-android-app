@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -105,7 +104,7 @@ private fun Preview() {
                 SimulatorItemView(
                     modifier = Modifier,
                     simulatorItem = SimulatorItem(
-                        controllerType = ControllerType.LIGHT_SENSOR,
+                        controllerType = ControllerType.LightSensor,
                         id = 23,
                         name = "Kitchen sensor"
                     ),
@@ -116,7 +115,7 @@ private fun Preview() {
                 SimulatorItemView(
                     modifier = Modifier,
                     simulatorItem = SimulatorItem(
-                        controllerType = ControllerType.LIGHT_SENSOR,
+                        controllerType = ControllerType.LightSensor,
                         id = 23,
                         name = "Bedroom sensor"
                     ),

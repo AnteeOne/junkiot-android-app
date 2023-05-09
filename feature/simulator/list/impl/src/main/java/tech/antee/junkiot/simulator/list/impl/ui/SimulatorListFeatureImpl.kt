@@ -42,7 +42,7 @@ class SimulatorListFeatureImpl @Inject constructor() : SimulatorListFeature() {
             viewModel = viewModel,
             onNavToDetails = { id, controllerType ->
                 when (controllerType) {
-                    ControllerType.LIGHT_SENSOR -> {
+                    ControllerType.LightSensor -> {
                         navController.navigate(lightSensorSimulatorFeature.destination(id))
                     }
                 }

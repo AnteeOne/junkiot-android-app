@@ -111,7 +111,7 @@ private fun Preview() {
             ControllerItemView(
                 modifier = Modifier.fillMaxWidth(),
                 controllerItem = ControllerItem(
-                    controllerType = ControllerType.LIGHT_SENSOR,
+                    controllerType = ControllerType.LightSensor,
                     id = 23,
                     name = "Bedroom sensor",
                     isOnline = false
@@ -121,7 +121,7 @@ private fun Preview() {
             ControllerItemView(
                 modifier = Modifier.fillMaxWidth(),
                 controllerItem = ControllerItem(
-                    controllerType = ControllerType.LIGHT_SENSOR,
+                    controllerType = ControllerType.LightSensor,
                     id = 23,
                     name = "Kitchen sensor",
                     isOnline = true

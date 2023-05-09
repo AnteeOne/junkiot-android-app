@@ -1,10 +1,10 @@
 package tech.antee.junkiot.controll.common.models
 
 enum class ControllerType(val id: Int) {
-    LIGHT_SENSOR(0)
+    LightSensor(0)
 }
 
 fun Int.parseControllerType(): ControllerType = when (this) {
-    ControllerType.LIGHT_SENSOR.id -> ControllerType.LIGHT_SENSOR
+    ControllerType.LightSensor.id -> ControllerType.LightSensor
     else -> throw IllegalStateException("Unknown controller id!")
 }
