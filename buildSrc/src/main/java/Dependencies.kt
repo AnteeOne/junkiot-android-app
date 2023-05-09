@@ -42,6 +42,7 @@ object Versions {
     const val composeMaterial = "1.0.1"
     const val accompanist = "0.25.1"
     const val coil = "2.3.0"
+    const val tensorFlowAudio = "0.4.3"
 
     const val mockito = "4.0.0"
     const val mockitoKotlin = "2.1.0"
@@ -145,5 +146,9 @@ object Deps {
 
     object GMS {
         const val authApiPhone = "com.google.android.gms:play-services-auth-api-phone:${Versions.authApiPhone}"
+    }
+
+    object ML {
+        const val tensorFlowAudio = "org.tensorflow:tensorflow-lite-task-audio:${Versions.tensorFlowAudio}"
     }
 }
