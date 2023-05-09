@@ -29,9 +29,14 @@ include(":feature:main:impl")
 include(":feature:controller:list:api")
 include(":feature:controller:list:impl")
 
-include(":lib:controll:api")
-include(":lib:controll:impl")
 include(":feature:simulator:list:api")
 include(":feature:simulator:list:impl")
+
 include(":feature:simulator:light-sensor:api")
 include(":feature:simulator:light-sensor:impl")
+
+include(":lib:controll:api")
+include(":lib:controll:impl")
+
+include(":lib:tensorflow-bridge:api")
+include(":lib:tensorflow-bridge:impl")

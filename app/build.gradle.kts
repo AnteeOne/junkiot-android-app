@@ -27,6 +27,7 @@ dependencies {
     projectImplementation(Modules.commonMultiCompose)
 
     projectImplementation(Modules.libControllImpl)
+    projectImplementation(Modules.libTensorFlowBridgeImpl)
 
     projectImplementation(Modules.featureMainImpl)
     projectImplementation(Modules.featureControllerListImpl)

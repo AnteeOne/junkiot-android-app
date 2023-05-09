@@ -29,4 +29,6 @@ object Modules {
 
     const val libControllApi = ":lib:controll:api"
     const val libControllImpl = ":lib:controll:impl"
+    const val libTensorFlowBridgeApi = ":lib:tensorflow-bridge:api"
+    const val libTensorFlowBridgeImpl = ":lib:tensorflow-bridge:impl"
 }
