@@ -14,6 +14,18 @@ class SimulatorLocalSourceImpl @Inject constructor() : SimulatorLocalSource {
             1,
             "Bedroom sensor",
             true
+        ),
+        ControllerEntity(
+            ControllerType.ClapsDetector,
+            2,
+            "Hallway detector",
+            true
+        ),
+        ControllerEntity(
+            ControllerType.NoiseSensor,
+            3,
+            "Kitchen sensor",
+            true
         )
     )
 
