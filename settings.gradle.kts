@@ -34,6 +34,10 @@ include(":feature:simulator:list:impl")
 
 include(":feature:simulator:light-sensor:api")
 include(":feature:simulator:light-sensor:impl")
+include(":feature:simulator:claps-detector:impl")
+include(":feature:simulator:claps-detector:api")
+include(":feature:simulator:noise-sensor:impl")
+include(":feature:simulator:noise-sensor:api")
 
 include(":lib:controll:api")
 include(":lib:controll:impl")
