@@ -7,7 +7,7 @@ import tech.antee.junkiot.controll.common.usecases.ObserveSimulatorUsecase
 import tech.antee.junkiot.controll.light_sensor.models.Lux
 import tech.antee.junkiot.controll.light_sensor.usecases.AddLightSensorValueUsecase
 import tech.antee.junkiot.controll.light_sensor.usecases.ObserveLightPredictionsUsecase
-import tech.antee.junkiot.simulator.light_sensor.impl.di.ControllerId
+import tech.antee.junkiot.di.qualifiers.ControllerId
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Action
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.Event
 import tech.antee.junkiot.simulator.light_sensor.impl.ui.items.UiState

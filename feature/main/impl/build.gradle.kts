@@ -18,6 +18,8 @@ dependencies {
     projectImplementation(Modules.featureControllerListApi)
     projectImplementation(Modules.featureSimulatorListApi)
     projectImplementation(Modules.featureSimulatorLightSensorApi)
+    projectImplementation(Modules.featureSimulatorClapsDetectorApi)
+    projectImplementation(Modules.featureSimulatorNoiseSensorApi)
 
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)

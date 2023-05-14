@@ -27,6 +27,7 @@ import tech.antee.junkiot.multi_compose.Destinations
 import tech.antee.junkiot.multi_compose.find
 import tech.antee.junkiot.multi_compose.ui.LocalNavigationBarState
 import tech.antee.junkiot.multi_compose.ui.rememberNavigationBarState
+import tech.antee.junkiot.simulator.claps_detector.ui.ClapsDetectorSimulatorFeature
 import tech.antee.junkiot.simulator.light_sensor.ui.LightSensorSimulatorFeature
 import tech.antee.junkiot.simulator.list.SimulatorListFeature
 import javax.inject.Inject
@@ -42,7 +43,9 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
         val controllersFeature = destinations.find<ControllerListFeature>()
         val simulatorsFeature = destinations.find<SimulatorListFeature>()
 //        val settingsFeature = destinations.find<SettingsFeature>() TODO: add the remaining screens
+
         val lightSensorDetailsFeature = destinations.find<LightSensorSimulatorFeature>()
+        val clapsDetectorDetailsFeature = destinations.find<ClapsDetectorSimulatorFeature>()
 
         val navigationItems = listOf(
             NavigationItem(R.drawable.ic_home, R.string.nav_home, controllersFeature.featureRoute),
@@ -81,6 +84,7 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
                     with(simulatorsFeature) { composable(mainNavController, destinations) }
                     composable("settings") { FeaturePlaceholder("Settings") }
                     with(lightSensorDetailsFeature) { composable(mainNavController, destinations) }
+                    with(clapsDetectorDetailsFeature) { composable(mainNavController, destinations) }
                 }
             }
         }

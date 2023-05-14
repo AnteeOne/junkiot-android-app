@@ -1,4 +1,4 @@
-package tech.antee.junkiot.simulator.light_sensor.impl.di
+package tech.antee.junkiot.di.qualifiers
 
 import javax.inject.Qualifier
 

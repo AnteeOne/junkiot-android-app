@@ -1,4 +1,4 @@
-package tech.antee.junkiot.simulator.light_sensor.impl.ui
+package tech.antee.junkiot.simulator.claps_detector.impl.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,13 +8,13 @@ import androidx.navigation.NavHostController
 import tech.antee.junkiot.multi_compose.Destinations
 import tech.antee.junkiot.multi_compose.di.injectedViewModel
 import tech.antee.junkiot.multi_compose.ui.LocalNavigationBarState
-import tech.antee.junkiot.simulator.light_sensor.impl.di.DaggerLightSensorSimulatorComponent
-import tech.antee.junkiot.simulator.light_sensor.impl.di.LocalLightSensorSimulatorDependencies
-import tech.antee.junkiot.simulator.light_sensor.impl.ui.views.LightSensorSimulatorScreen
-import tech.antee.junkiot.simulator.light_sensor.ui.LightSensorSimulatorFeature
+import tech.antee.junkiot.simulator.claps_detector.impl.di.DaggerClapsDetectorSimulatorComponent
+import tech.antee.junkiot.simulator.claps_detector.impl.di.LocalClapsDetectorSimulatorDependencies
+import tech.antee.junkiot.simulator.claps_detector.impl.ui.views.ClapsDetectorSimulatorScreen
+import tech.antee.junkiot.simulator.claps_detector.ui.ClapsDetectorSimulatorFeature
 import javax.inject.Inject
 
-class LightSensorSimulatorFeatureImpl @Inject constructor() : LightSensorSimulatorFeature() {
+class ClapsDetectorSimulatorFeatureImpl @Inject constructor() : ClapsDetectorSimulatorFeature() {
 
     @Composable
     override fun NavGraphBuilder.Composable(
@@ -28,14 +28,14 @@ class LightSensorSimulatorFeatureImpl @Inject constructor() : LightSensorSimulat
         }
 
         backStackEntry.arguments?.getInt(controllerIdArgument)?.let { controllerId ->
-            val deps = LocalLightSensorSimulatorDependencies.current
+            val deps = LocalClapsDetectorSimulatorDependencies.current
             val viewModel = injectedViewModel {
-                DaggerLightSensorSimulatorComponent
+                DaggerClapsDetectorSimulatorComponent
                     .factory()
                     .create(deps, controllerId)
                     .viewModel
             }
-            LightSensorSimulatorScreen(
+            ClapsDetectorSimulatorScreen(
                 viewModel = viewModel,
                 onNavBack = {
                     navController.navigateUp()
