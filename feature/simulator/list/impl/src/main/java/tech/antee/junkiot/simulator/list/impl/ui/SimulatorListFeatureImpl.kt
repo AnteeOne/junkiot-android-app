@@ -16,6 +16,7 @@ import tech.antee.junkiot.simulator.list.SimulatorListFeature
 import tech.antee.junkiot.simulator.list.impl.di.DaggerSimulatorListComponent
 import tech.antee.junkiot.simulator.list.impl.di.LocalSimulatorListDependencies
 import tech.antee.junkiot.simulator.list.impl.ui.views.SimulatorListScreen
+import tech.antee.junkiot.simulator.noise_sensor.ui.NoiseSensorSimulatorFeature
 import javax.inject.Inject
 
 class SimulatorListFeatureImpl @Inject constructor() : SimulatorListFeature() {
@@ -40,6 +41,7 @@ class SimulatorListFeatureImpl @Inject constructor() : SimulatorListFeature() {
         }
 
         val lightSensorSimulatorFeature = destinations.find<LightSensorSimulatorFeature>()
+        val noiseSensorSimulatorFeature = destinations.find<NoiseSensorSimulatorFeature>()
         val clapsDetectorSimulatorFeature = destinations.find<ClapsDetectorSimulatorFeature>()
         SimulatorListScreen(
             viewModel = viewModel,
@@ -47,7 +49,7 @@ class SimulatorListFeatureImpl @Inject constructor() : SimulatorListFeature() {
                 val destination = when (controllerType) {
                     ControllerType.LightSensor -> lightSensorSimulatorFeature.destination(id)
                     ControllerType.ClapsDetector -> clapsDetectorSimulatorFeature.destination(id)
-                    ControllerType.NoiseSensor -> error("Not implemented!")
+                    ControllerType.NoiseSensor -> noiseSensorSimulatorFeature.destination(id)
                 }
                 navController.navigate(destination)
             }

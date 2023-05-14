@@ -30,6 +30,7 @@ import tech.antee.junkiot.multi_compose.ui.rememberNavigationBarState
 import tech.antee.junkiot.simulator.claps_detector.ui.ClapsDetectorSimulatorFeature
 import tech.antee.junkiot.simulator.light_sensor.ui.LightSensorSimulatorFeature
 import tech.antee.junkiot.simulator.list.SimulatorListFeature
+import tech.antee.junkiot.simulator.noise_sensor.ui.NoiseSensorSimulatorFeature
 import javax.inject.Inject
 
 class MainFeatureImpl @Inject constructor() : MainFeature() {
@@ -46,6 +47,7 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
 
         val lightSensorDetailsFeature = destinations.find<LightSensorSimulatorFeature>()
         val clapsDetectorDetailsFeature = destinations.find<ClapsDetectorSimulatorFeature>()
+        val noiseSensorDetailsFeature = destinations.find<NoiseSensorSimulatorFeature>()
 
         val navigationItems = listOf(
             NavigationItem(R.drawable.ic_home, R.string.nav_home, controllersFeature.featureRoute),
@@ -85,6 +87,7 @@ class MainFeatureImpl @Inject constructor() : MainFeature() {
                     composable("settings") { FeaturePlaceholder("Settings") }
                     with(lightSensorDetailsFeature) { composable(mainNavController, destinations) }
                     with(clapsDetectorDetailsFeature) { composable(mainNavController, destinations) }
+                    with(noiseSensorDetailsFeature) { composable(mainNavController, destinations) }
                 }
             }
         }

@@ -22,6 +22,7 @@ import tech.antee.junkiot.multi_compose.find
 import tech.antee.junkiot.simulator.claps_detector.impl.di.LocalClapsDetectorSimulatorDependencies
 import tech.antee.junkiot.simulator.light_sensor.impl.di.LocalLightSensorSimulatorDependencies
 import tech.antee.junkiot.simulator.list.impl.di.LocalSimulatorListDependencies
+import tech.antee.junkiot.simulator.noise_sensor.impl.di.LocalNoiseSensorSimulatorDependencies
 import tech.antee.junkiot.styles.theme.JunkiotTheme
 
 class MainActivity : ComponentActivity() {
@@ -65,6 +66,7 @@ class MainActivity : ComponentActivity() {
             LocalSimulatorListDependencies provides application.appProvider,
             LocalLightSensorSimulatorDependencies provides application.appProvider,
             LocalClapsDetectorSimulatorDependencies provides application.appProvider,
+            LocalNoiseSensorSimulatorDependencies provides application.appProvider,
             content = content
         )
     }
