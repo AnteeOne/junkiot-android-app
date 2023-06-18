@@ -2,6 +2,9 @@ package tech.antee.junkiot.tensorflow_bridge.impl.audio.core.delegate
 
 import android.content.Context
 import android.media.AudioRecord
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
 import org.tensorflow.lite.support.audio.TensorAudio
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier
 import org.tensorflow.lite.task.core.BaseOptions
@@ -23,31 +26,38 @@ abstract class AudioClassifierDelegate @Inject constructor(
     protected var tensorAudio: TensorAudio? = null
     protected var recorder: AudioRecord? = null
 
-    private var executor: ScheduledThreadPoolExecutor
+    private var executor: ScheduledThreadPoolExecutor? = null
     private val classifyRunnable = Runnable { classifyAudio() }
 
-    init {
+    protected open val onInitialized: (() -> Unit)? = null
+
+    open fun initialize() {
         with(audioClassifierSettings) {
             val baseOptionsBuilder = BaseOptions.builder()
                 .setNumThreads(classifyingThreadNum)
                 .useNnapi()
 
             val options = AudioClassifier.AudioClassifierOptions.builder()
-                .setScoreThreshold(displayThreshold)
-                .setMaxResults(numOfResults)
-                .setBaseOptions(baseOptionsBuilder.build())
-                .setAudioLabelAllowList(audioLabels)
+                .apply {
+                    setScoreThreshold(displayThreshold)
+                    setMaxResults(numOfResults)
+                    setBaseOptions(baseOptionsBuilder.build())
+                    if (audioLabels.isNotEmpty()) setAudioLabelAllowList(audioLabels)
+                }
                 .build()
 
             executor = ScheduledThreadPoolExecutor(recordingThreadsNum)
 
-            audioClassifier = AudioClassifier.createFromFileAndOptions(
-                context,
-                yamnetModelName,
-                options
-            )
-            tensorAudio = audioClassifier?.createInputTensorAudio()
-            recorder = audioClassifier?.createAudioRecord()
+            CoroutineScope(executor!!.asCoroutineDispatcher()).launch {
+                audioClassifier = AudioClassifier.createFromFileAndOptions(
+                    context,
+                    yamnetModelName,
+                    options
+                )
+                tensorAudio = audioClassifier?.createInputTensorAudio()
+                recorder = audioClassifier?.createAudioRecord()
+                onInitialized?.invoke()
+            }
         }
     }
 
@@ -57,7 +67,7 @@ abstract class AudioClassifierDelegate @Inject constructor(
         }
         recorder?.startRecording()
 
-        executor.scheduleAtFixedRate(
+        executor?.scheduleAtFixedRate(
             classifyRunnable,
             audioClassifierSettings.recordingDelayMs,
             audioClassifierSettings.recordingPeriodMs,
@@ -67,7 +77,7 @@ abstract class AudioClassifierDelegate @Inject constructor(
 
     fun stopAudioClassification() {
         recorder?.stop()
-        executor.remove(classifyRunnable)
+        executor?.remove(classifyRunnable)
     }
 
     abstract fun classifyAudio()

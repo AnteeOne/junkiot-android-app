@@ -8,8 +8,10 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import tech.antee.junkiot.data.remote.config.NetworkConfig
+import tech.antee.junkiot.data.remote.di.qualifiers.ScarletClapsDetectorPredictionsQualifier
 import tech.antee.junkiot.data.remote.di.qualifiers.ScarletControllersQualifier
 import tech.antee.junkiot.data.remote.di.qualifiers.ScarletLightSensorPredictionsQualifier
+import tech.antee.junkiot.data.remote.di.qualifiers.ScarletNoiseDetectorPredictionsQualifier
 import tech.antee.junkiot.data.remote.di.qualifiers.ScarletOkHttpQualifier
 import tech.antee.junkiot.data.remote.scarlet.FlowStreamAdapter
 import javax.inject.Singleton
@@ -32,6 +34,22 @@ class ScarletModule {
         @ScarletOkHttpQualifier okHttpClient: OkHttpClient,
         streamAdapterFactory: StreamAdapter.Factory
     ): Scarlet = createScarletClient("controllers/light-sensor/predictions", okHttpClient, streamAdapterFactory)
+
+    @Singleton
+    @Provides
+    @ScarletClapsDetectorPredictionsQualifier
+    fun scarletClapsDetectorValues(
+        @ScarletOkHttpQualifier okHttpClient: OkHttpClient,
+        streamAdapterFactory: StreamAdapter.Factory
+    ): Scarlet = createScarletClient("controllers/claps-detector/values", okHttpClient, streamAdapterFactory)
+
+    @Singleton
+    @Provides
+    @ScarletNoiseDetectorPredictionsQualifier
+    fun scarletNoiseDetectorValues(
+        @ScarletOkHttpQualifier okHttpClient: OkHttpClient,
+        streamAdapterFactory: StreamAdapter.Factory
+    ): Scarlet = createScarletClient("controllers/noise-detector/values", okHttpClient, streamAdapterFactory)
 
     @Singleton
     @Provides

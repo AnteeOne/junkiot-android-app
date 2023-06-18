@@ -16,6 +16,7 @@ dependencies {
 
     projectApi(Modules.featureSimulatorClapsDetectorApi)
     projectImplementation(Modules.libControllApi)
+    projectImplementation(Modules.libTensorFlowBridgeImpl)
 
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)

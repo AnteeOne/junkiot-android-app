@@ -1,7 +1,9 @@
 package tech.antee.junkiot.simulator.claps_detector.impl.ui.mappers
 
 import tech.antee.junkiot.controll.common.models.Controller
+import tech.antee.junkiot.simulator.claps_detector.impl.ui.items.DetectorUiState
 import tech.antee.junkiot.simulator.claps_detector.impl.ui.items.SimulatorItem
+import tech.antee.junkiot.tensorflow_bridge.audio.services.sound_detection.DetectorState
 import javax.inject.Inject
 
 class SimulatorUiMapper @Inject constructor() {
@@ -13,5 +15,11 @@ class SimulatorUiMapper @Inject constructor() {
             name = name,
             isOnline = isOnline
         )
+    }
+
+    fun map(detectorState: DetectorState): DetectorUiState = when(detectorState) {
+        DetectorState.Empty -> DetectorUiState.Empty
+        DetectorState.Disabled -> DetectorUiState.Disabled
+        DetectorState.Enabled -> DetectorUiState.Enabled
     }
 }

@@ -8,6 +8,7 @@ import tech.antee.junkiot.controll.impl.light_sensor.remote.dto.AddLightSensorVa
 
 interface LightSensorApi {
 
+    // TODO: add dto
     @GET("controllers/light-sensor/values")
     suspend fun getLightSensorValues(@Path("controllerId") controllerId: Int? = null)
 
